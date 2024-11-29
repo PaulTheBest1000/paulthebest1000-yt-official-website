@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color:gray;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #FFFFFF;
+}
+
+p1 {
+    color:green
+}
+
+p3 {
+    color:yellow
+}
+
+.button1 {
+    background-color: #b30000;
+    color: greenyellow;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.button1:hover {
+    background-color: #4f0000;
+    color: limegreen;
+}
+
+.button2 {
+    background-color: #0000b3;
+    color: limegreen;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.button2:hover {
+    background-color: #00004f;
+    color: greenyellow;
+}
+
+.button3 {
+    background-color: #00b300;
+    color: yellow;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.button3:hover {
+    background-color: #004f00;
+    color: yellowgreen;
+}
