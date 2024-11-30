@@ -8,22 +8,42 @@
     <link rel="icon" href="IMG_2379.JPG" type="image/jpeg">
     <!-- Main Styles -->
     <style>
+        .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
         .container {
           display: flex;
           flex-wrap: wrap;
         }
     
-        .box {
+        .item {
           flex: 1 1 300px;
           margin: 10px;
           padding: 20px;
           background-color: lightblue;
         }
     
-        /* Media Query - Responsive Styles */
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+    
         @media (max-width: 768px) {
-          .box {
-            flex: 1 1 100%; /* Full width on small screens */
+          .item {
+            flex: 1 1 100%; /* Make items full width on small screens */
           }
         }
       </style>
@@ -31,20 +51,23 @@
 <body>
   <!-- Responsive Image -->
     <h1>Welcome to my website and this is one of my YouTube Videos</h1>
-    <iframe width="600" height="400" src="https://www.youtube.com/embed/Aksp-xqZldU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/Aksp-xqZldU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
     <p><p1 style="font-size: 45px;">This is my first website using VS Code.</p1></p>
-    <p><p2><img src="IMG_9924.JPG"
-        srcset="IMG_9924.JPG 768w, IMG_9924.JPG 1200w" 
+    <p><p2><img src="IMG_9924 (2).jpg"
+        srcset="IMG_9924 (1).jpg 768w, IMG_9924.JPG 1200w" 
         sizes="(max-width: 768px) 100vw, 50vw" 
         alt="Responsive Image"></p2></p>
     <p><p3 style="font-size: 45px;">And pls don't be bored</p3></p>
-    <p><p4><img src="IMG_9931.JPG"
-        srcset="IMG_9931.JPG 768w, IMG_9931.JPG 1200w" 
+    <p><p4><img src="IMG_9931 (2).jpg"
+        srcset="IMG_9931 (1).jpg 768w, IMG_9931.JPG 1200w" 
         sizes="(max-width: 768px) 100vw, 50vw" 
         alt="Responsive Image"></p4></p>
     <figure>
-    <p><img src="IMG_2601.JPG"
-        srcset="IMG_2601.JPG 768w, IMG_2601.JPG 1200w" 
+    <p><img src="IMG_2601 (2).jpg"
+        srcset="IMG_2601 (1).jpg 768w, IMG_2601.JPG 1200w" 
         sizes="(max-width: 768px) 100vw, 50vw" 
         alt="Responsive Image" title="My current mech" loading="lazy">
     <figcaption>This is what my mech looks right now!</figcaption></p>
