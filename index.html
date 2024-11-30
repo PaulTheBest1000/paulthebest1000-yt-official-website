@@ -6,21 +6,55 @@
     <title>PaulTheBest1000YT's Website</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="IMG_2379.JPG" type="image/jpeg">
+    <!-- Main Styles -->
+    <style>
+        .container {
+          display: flex;
+          flex-wrap: wrap;
+        }
+    
+        .box {
+          flex: 1 1 300px;
+          margin: 10px;
+          padding: 20px;
+          background-color: lightblue;
+        }
+    
+        /* Media Query - Responsive Styles */
+        @media (max-width: 768px) {
+          .box {
+            flex: 1 1 100%; /* Full width on small screens */
+          }
+        }
+      </style>
 </head>
 <body>
+  <!-- Responsive Image -->
     <h1>Welcome to my website and this is one of my YouTube Videos</h1>
     <iframe width="600" height="400" src="https://www.youtube.com/embed/Aksp-xqZldU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p><p1 style="font-size: 45px;">This is my first website using VS Code.</p1></p>
-    <p><p2><img src="IMG_9924.JPG"></p2></p>
+    <p><p2><img src="IMG_9924.JPG"
+        srcset="IMG_9924.JPG 768w, IMG_9924.JPG 1200w" 
+        sizes="(max-width: 768px) 100vw, 50vw" 
+        alt="Responsive Image"></p2></p>
     <p><p3 style="font-size: 45px;">And pls don't be bored</p3></p>
-    <p><p4><img src="IMG_9931.JPG"></p4></p>
+    <p><p4><img src="IMG_9931.JPG"
+        srcset="IMG_9931.JPG 768w, IMG_9931.JPG 1200w" 
+        sizes="(max-width: 768px) 100vw, 50vw" 
+        alt="Responsive Image"></p4></p>
     <figure>
-    <p><img src="IMG_2601.JPG" title="My current mech" loading="lazy">
+    <p><img src="IMG_2601.JPG"
+        srcset="IMG_2601.JPG 768w, IMG_2601.JPG 1200w" 
+        sizes="(max-width: 768px) 100vw, 50vw" 
+        alt="Responsive Image" title="My current mech" loading="lazy">
     <figcaption>This is what my mech looks right now!</figcaption></p>
-    <button class="button1" onclick="window.location.href='https://www.youtube.com/@PaulTheBest1000YT'">YouTube</button>
-    <button class="button2" onclick="window.location.href='https://discord.gg/mXWr3sk26a'">Discord</button>
-    <button class="button3" onclick="showMessage()">More Info</button>
     </figure>
     <script src="script.js"></script>
+  <!-- Place your HTML content here -->
+  <div class="container">
+    <div class="box"><button class="button1" onclick="window.location.href='https://www.youtube.com/@PaulTheBest1000YT'">YouTube</button></div>
+    <div class="box"><button class="button2" onclick="window.location.href='https://discord.gg/mXWr3sk26a'">Discord</button></div>
+    <div class="box"> <button class="button3" onclick="showMessage()">More Info</button></div>
+  </div>
 </body>
 </html>
