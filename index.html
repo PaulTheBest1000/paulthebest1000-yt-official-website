@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Add Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PaulTheBest1000YT's Website</title>
@@ -49,35 +51,64 @@
       </style>
 </head>
 <body>
+  <header>
+    <button class="menu-toggle" aria-label="Toggle menu">
+        &#9776; <!-- Hamburger Icon -->
+    </button>
+    <nav>
+      <ul class="menu">
+        <li><a href="#home"><i class="fa fa-home"></i> Home</a></li>
+        <li>
+            <a href="#videos"><i class="fa fa-desktop"></i> Videos</a>
+            <ul class="dropdown">
+                <li><a href="#wt"><i class="fa fa-star"></i> War Thunder</a></li>
+                <li><a href="#sm"><i class="fa fa-star"></i> Super Mechs</a></li>
+                <li><a href="#bored"><i class="fa fa-user"></i> Bored?</a></li>
+            </ul>
+        </li>
+        <li><a href="#youtube">YouTube</a></li>
+        <li><a href="#discord">Discord</a></li>
+    </ul>
+    </nav>
+</header>
+<div id="time"></div> <!-- Time display -->
+    <div id="calendar"></div> <!-- Calendar display -->
+
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
   <!-- Responsive Image -->
     <h1>Welcome to my website and this is one of my YouTube Videos</h1>
 
-  <div class="video-container">
+  <div class="video-container" id="wt">
     <iframe src="https://www.youtube.com/embed/Aksp-xqZldU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
-    <p><p1 style="font-size: 45px;">This is my first website using VS Code.</p1></p>
-    <p><p2><img src="IMG_9924 (2).jpg"
+    <p><p2 style="font-size: 45px;">This is my first website using VS Code.</p1></p>
+    <p><p3><img src="IMG_9924 (2).jpg"
         srcset="IMG_9924 (1).jpg 768w, IMG_9924.JPG 1200w" 
         sizes="(max-width: 768px) 100vw, 50vw" 
-        alt="Responsive Image"></p2></p>
-    <p><p3 style="font-size: 45px;">And pls don't be bored</p3></p>
-    <p><p4><img src="IMG_9931 (2).jpg"
+        alt="Responsive Image"></p3></p>
+    <div id="bored"><p><p4 style="font-size: 45px;">And pls don't be bored</p4></p>
+    <p><p5><img src="IMG_9931 (2).jpg"
         srcset="IMG_9931 (1).jpg 768w, IMG_9931.JPG 1200w" 
         sizes="(max-width: 768px) 100vw, 50vw" 
-        alt="Responsive Image"></p4></p>
+        alt="Responsive Image"></p5></p>
     <figure>
     <p><img src="IMG_2601 (2).jpg"
         srcset="IMG_2601 (1).jpg 768w, IMG_2601.JPG 1200w" 
         sizes="(max-width: 768px) 100vw, 50vw" 
         alt="Responsive Image" title="My current mech" loading="lazy">
     <figcaption>This is what my mech looks right now!</figcaption></p>
+    <div class="video-container" id="sm">
+    <iframe src="https://www.youtube.com/embed/qjdmeglGgnA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
     </figure>
     <script src="script.js"></script>
   <!-- Place your HTML content here -->
   <div class="container">
-    <div class="box"><button class="button1" onclick="window.location.href='https://www.youtube.com/@PaulTheBest1000YT'">YouTube</button></div>
-    <div class="box"><button class="button2" onclick="window.location.href='https://discord.gg/mXWr3sk26a'">Discord</button></div>
+    <div class="box" id="youtube"><button class="button1" onclick="window.location.href='https://www.youtube.com/@PaulTheBest1000YT'">YouTube</button></div>
+    <div class="box" id="discord"><button class="button2" onclick="window.location.href='https://discord.gg/mXWr3sk26a'">Discord</button></div>
     <div class="box"> <button class="button3" onclick="showMessage()">More Info</button></div>
   </div>
+</main>
+<script src="script.js"></script>
 </body>
 </html>

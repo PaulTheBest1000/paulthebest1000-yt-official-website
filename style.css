@@ -5,16 +5,202 @@ body {
     padding: 20px;
 }
 
+/* Base Styles */
+body, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+    background: #333;
+    padding: 10px 20px;
+    justify-content: center;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.menu a:hover {
+    background-color: #575757;
+    transform: scale(1.05);
+    border-radius: 5px;
+}
+
+/* Active Link Styling */
+.menu a.active {
+    color: cyan;
+    font-weight: bold;
+    border-bottom: 2px solid cyan;
+}
+
+/* Hover Underline Effect */
+.menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: white;
+    bottom: -5px;
+    left: 50%;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+/* Dropdown Styling */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    z-index: 1000;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.menu li:hover .dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown a {
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown a:hover {
+    background-color: #575757;
+}
+
+/* Responsive Menu */
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        display: none;
+        width: 100%;
+    }
+
+    .menu.active {
+        display: flex;
+    }
+
+    .menu li {
+        width: 100%;
+    }
+
+    .menu a {
+        display: block;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .dropdown {
+        position: static;
+        display: none;
+    }
+
+    .menu li.active .dropdown {
+        display: block;
+    }
+}
+
+/* Hamburger Button */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: yellowgreen;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    z-index: 1001;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+}
+
+.menu {
+    transition: max-height 0.3s ease;
+}
+
+/* Basic styling for the time and calendar */
+#time, #calendar {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    color: #333;
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Optional: Add a background color for the time */
+#time {
+    background-color: #dcdcdc;
+}
+
+/* Optional: Style the calendar */
+#calendar {
+    background-color: #e9e9e9;
+}
+
 h1 {
+        margin-top: 50px; /* Moves the h1 50px down */   
     color: #FFFFFF;
 }
 
-p1 {
+p2 {
     color:green
 }
 
 p3 {
+    color:blue
+}
+
+p4 {
     color:yellow
+}
+
+p5 {
+    color:red
 }
 
 .button1 {
