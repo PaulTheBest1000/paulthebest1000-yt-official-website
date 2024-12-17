@@ -1,3 +1,54 @@
+// script.js
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+                console.log('Service Worker registration failed:', error);
+            });
+    });
+  }
+  
+  // main.js (or your script.js file)
+  
+  const startOfflineTime = new Date();
+  startOfflineTime.setHours(12, 0, 0, 0); // Set 12:00 PM
+  
+  const endOfflineTime = new Date();
+  endOfflineTime.setHours(18, 0, 0, 0); // Set 6:00 PM
+  
+  function checkOfflinePeriod() {
+      const currentTime = new Date();
+  
+      // Check if the current time is between the offline start and end time
+      if (currentTime >= startOfflineTime && currentTime <= endOfflineTime) {
+          // Enable offline behavior
+          enableOfflineMode();
+      } else {
+          // Disable offline behavior
+          disableOfflineMode();
+      }
+  }
+  
+  function enableOfflineMode() {
+      console.log("Website is in offline mode.");
+      // Optionally, show a message or activate service worker's caching behavior
+  }
+  
+  function disableOfflineMode() {
+      console.log("Website is back online.");
+      // Reset to normal behavior
+  }
+  
+  // Check if the site should be offline immediately
+  checkOfflinePeriod();
+  
+  // Optionally, check every minute
+  setInterval(checkOfflinePeriod, 60000);
+  
 // Example: Highlight the active menu item on click
 document.querySelectorAll('.menu a').forEach(link => {
     link.addEventListener('click', () => {
