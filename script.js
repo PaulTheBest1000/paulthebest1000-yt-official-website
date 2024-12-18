@@ -108,9 +108,8 @@ function updateCalendar() {
     calendarElement.innerHTML = `Today: ${dayOfWeek}, ${month}/${day}/${year}`;
 }
 
-// Update the time and calendar every second
-setInterval(updateTime, 1000);
-setInterval(updateCalendar, 1000);
+setInterval(updateTime, 1000); // Keep updating time every second
+setInterval(updateCalendar, 60000); // Update calendar every minute (60000 ms)
 
 // Initialize the time and calendar display
 updateTime();
