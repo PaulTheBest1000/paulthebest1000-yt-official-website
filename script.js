@@ -18,7 +18,7 @@ if ('serviceWorker' in navigator) {
   startOfflineTime.setHours(12, 0, 0, 0); // Set 12:00 PM
   
   const endOfflineTime = new Date();
-  endOfflineTime.setHours(18, 0, 0, 0); // Set 6:00 PM
+  endOfflineTime.setHours(19, 30, 0, 0); // Set 7:30 PM
   
   function checkOfflinePeriod() {
       const currentTime = new Date();
