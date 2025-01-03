@@ -90,6 +90,25 @@
   <div id="time"></div> <!-- Time display -->
   <div id="calendar"></div> <!-- Calendar display -->
 
+  <section id="sub-count">
+    <h2>Subscriber Count</h2>
+    <p id="count">Loading...</p>
+</section>
+
+<script>
+    // Replace with your actual API Key and Channel ID
+    const apiKey = 'AIzaSyC2lr9udYtnmq9a2gGT9WX9YSajEnt_C3c'; // Replace with your API key
+    const channelId = 'UCe4H2F2AWwItE23ookYaGag'; // Replace with your YouTube Channel ID
+
+    fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            const count = data.items[0].statistics.subscriberCount;
+            document.getElementById('count').textContent = `${count} Subscribers`;
+        })
+        .catch(() => document.getElementById('count').textContent = 'Error fetching data');
+</script>
+
   <!-- Responsive Image -->
     <h1>Welcome to my official website and this is one of my YouTube Videos</h1>
 
@@ -123,6 +142,29 @@
     <div class="box"> <button class="button3" onclick="showMessage()">More Info</button></div>
   </div>
 </main>
+<section id="video-gallery">
+  <h2>My Other Videos</h2>
+  <div class="video">
+      <iframe src="https://www.youtube.com/embed/8PhKrsSM_2M" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <div class="video">
+      <iframe src="https://www.youtube.com/embed/ixNA-N1dDeE" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <div class="video">
+      <iframe src="https://www.youtube.com/embed/M_lxFPRuaI0" frameborder="0" allowfullscreen></iframe>
+  </div>
+</section>
+<style>
+  #video-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+  }
+  .video iframe {
+      width: 100%;
+      height: 200px;
+  }
+</style>
 <script src="script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>
