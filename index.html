@@ -135,12 +135,21 @@
     <iframe src="https://www.youtube.com/embed/qjdmeglGgnA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     </figure>
+
+    <div id="easter-egg" onclick="showSecret()" style="color: #767676;">Click me for a surprise!</div>
+    <script>
+        function showSecret() {
+            alert('You found the secret! Now DM PaulTheBest1000 YT!');
+        }
+    </script>
+    
   <!-- Place your HTML content here -->
   <div class="container">
     <div class="box" id="youtube"><button class="button1" onclick="window.location.href='https://www.youtube.com/@PaulTheBest1000YT'">YouTube</button></div>
     <div class="box" id="discord"><button class="button2" onclick="window.location.href='https://discord.gg/mXWr3sk26a'">Discord</button></div>
     <div class="box"> <button class="button3" onclick="showMessage()">More Info</button></div>
   </div>
+
 </main>
 <section id="video-gallery">
   <h2>My Other Videos</h2>
@@ -165,6 +174,7 @@
       height: 200px;
   }
 </style>
+
 <script src="script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>
