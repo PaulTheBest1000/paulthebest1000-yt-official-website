@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://paulthebest1000.github.io/paulthebest1000-yt-official-website/sitemap.xml
+
