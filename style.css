@@ -241,3 +241,102 @@ p5 {
     background-color: #004f00;
     color: yellowgreen;
 }
+
+/* Back to Home Button */
+.back-home {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 18px;
+    color: lightgray;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 2px solid darkgray;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.back-home:hover {
+    background-color: darkgray;
+    color: white;
+}
+
+/* Back to Videos Button */
+.back-videos {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 18px;
+    color: #28a745; /* Green */
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 2px solid #28a745;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.back-videos:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+/* War Thunder Button */
+.war-thunder {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 18px;
+    color: #a72845; /* Red */
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 2px solid #a72845;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.war-thunder:hover {
+    background-color: #a72845;
+    color: white;
+}
+
+/* Super Mechs Button */
+.super-mechs {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 18px;
+    color: #a7a745; /* Yellow */
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 2px solid #a7a745;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.super-mechs:hover {
+    background-color: #a7a745;
+    color: white;
+}
+
+/* Video gallery styling */
+#video-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 videos per row */
+    gap: 20px;
+    padding: 20px;
+}
+
+.video iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+    #video-gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2 per row on medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    #video-gallery {
+        grid-template-columns: repeat(1, 1fr); /* 1 per row on small screens */
+    }
+}
