@@ -11,8 +11,8 @@
     <meta name="author" content="PaulTheBest1000 YT">
     <title>PaulTheBest1000YT's Website</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="morse-code.css">
     <link rel="icon" href="IMG_2379.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <!-- Open Graph tags --> 
 <meta property="og:title" content="PaulTheBest1000's Website" />
@@ -28,48 +28,6 @@
 <meta name="twitter:description" content="Official website for PaulTheBest1000, featuring War Thunder Mobile and Super Mechs content. Subscribe for updates and videos!" />
 <meta property="twitter:image" content="https://github.com/PaulTheBest1000/paulthebest1000-yt/blob/b8c5e8e40183575f3e794ff9f18f517f6cc3e8cf/bandicam%202024-12-07%2015-22-12-991.jpg?raw=true" />
 <meta name="twitter:url" content="https://paulthebest1000.github.io/paulthebest1000-yt-official-website/" />
-
-    <!-- Main Styles -->
-    <style>
-        .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-        .container {
-          display: flex;
-          flex-wrap: wrap;
-        }
-    
-        .item {
-          flex: 1 1 300px;
-          margin: 10px;
-          padding: 20px;
-          background-color: lightblue;
-        }
-    
-        img {
-          max-width: 100%;
-          height: auto;
-        }
-    
-        @media (max-width: 768px) {
-          .item {
-            flex: 1 1 100%; /* Make items full width on small screens */
-          }
-        }
-      </style>
 </head>
 <body>
   <header>
@@ -85,8 +43,8 @@
                 <li><a href="bored.html"><i class="fa fa-user"></i> Bored?</a></li>
             </ul>
         </li>
-        <li><a href="youtube.html">YouTube</a></li>
-        <li><a href="discord.html">Discord</a></li>
+        <li><a href="youtube.html"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+        <li><a href="discord.html"><i class="fa-brands fa-discord"></i> Discord</a></li>
     </ul>
     </nav>
 </header>
@@ -115,28 +73,10 @@
   <!-- Responsive Image -->
     <h1>Welcome to my official website and this is one of my YouTube Videos</h1>
 
-  <div class="video-container" id="wt">
+  <div class="video-container">
     <iframe src="https://www.youtube.com/embed/Aksp-xqZldU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
     <p><p2 style="font-size: 45px;">This is my first website using VS Code.</p1></p>
-
-      <div class="morse-container">
-        <h1>Morse Code Converter</h1>
-        <select id="conversionType">
-          <option value="textToMorse">Text to Morse</option>
-          <option value="textToMorseAudio">Text to Morse Audio</option>
-          <option value="morseToText">Morse to Text</option>
-          <option value="morseAudioToText">Morse Audio to Text</option>
-      </select>
-      
-        <textarea id="inputText" placeholder="Enter text or Morse code..."></textarea>
-        <button id="convertBtn">Convert</button>
-        <textarea id="outputText" placeholder="Converted result..." readonly></textarea>
-    </div>
-    
-    <div class="box"><button id="downloadBtn" style="display: none;">Download Morse Audio</button></div>
-
-    <p>Find a .wav to .mp3 converter from the web if you want to listen to it on most .mp3 devices!</p>
 
     <div id="easter-egg" onclick="showSecret()" style="color: #7b7b7b;">Click me for a surprise!</div>
     <script>
