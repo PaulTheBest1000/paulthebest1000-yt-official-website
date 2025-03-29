@@ -11,6 +11,7 @@
     <meta name="author" content="PaulTheBest1000 YT">
     <title>PaulTheBest1000YT's Website</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="morse-code.css">
     <link rel="icon" href="IMG_2379.ico" type="image/x-icon">
 
     <!-- Open Graph tags --> 
@@ -118,6 +119,24 @@
     <iframe src="https://www.youtube.com/embed/Aksp-xqZldU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
     <p><p2 style="font-size: 45px;">This is my first website using VS Code.</p1></p>
+
+      <div class="morse-container">
+        <h1>Morse Code Converter</h1>
+        <select id="conversionType">
+          <option value="textToMorse">Text to Morse</option>
+          <option value="textToMorseAudio">Text to Morse Audio</option>
+          <option value="morseToText">Morse to Text</option>
+          <option value="morseAudioToText">Morse Audio to Text</option>
+      </select>
+      
+        <textarea id="inputText" placeholder="Enter text or Morse code..."></textarea>
+        <button id="convertBtn">Convert</button>
+        <textarea id="outputText" placeholder="Converted result..." readonly></textarea>
+    </div>
+    
+    <div class="box"><button id="downloadBtn" style="display: none;">Download Morse Audio</button></div>
+
+    <p>Find a .wav to .mp3 converter from the web if you want to listen to it on most .mp3 devices!</p>
 
     <div id="easter-egg" onclick="showSecret()" style="color: #7b7b7b;">Click me for a surprise!</div>
     <script>
