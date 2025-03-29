@@ -208,13 +208,15 @@ document.addEventListener("DOMContentLoaded", function () {
             generateMorseAudio(morseCode, function(audioBlob) {
                 let downloadBtn = document.getElementById("downloadBtn");
                 let url = URL.createObjectURL(audioBlob);
+
+                // Show download button and set up the download link
                 downloadBtn.href = url;
                 downloadBtn.download = "morse_audio.wav";
                 downloadBtn.style.display = "block";
             });
             output = "🔊 Morse audio generated! Click download.";
         } else if (conversionType === "morseToText") {
-            output = morseToText(inputText);
+            output = morseToText(inputText); // Implement morseToText if needed
         }
 
         document.getElementById("outputText").value = output;
