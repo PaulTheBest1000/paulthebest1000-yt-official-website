@@ -66,26 +66,10 @@ document.querySelectorAll('.menu li').forEach(item => {
     });
 });
 
-// Toggle menu visibility on mobile
-const menuToggle = document.querySelector('.menu-toggle');
-const menu = document.querySelector('.menu');
-
-menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('active');
-});
-
-
-// Handle Dropdown in Mobile
-document.querySelectorAll('.menu li').forEach(item => {
-    item.addEventListener('click', () => {
-        const dropdown = item.querySelector('.dropdown');
-        if (dropdown) {
-            dropdown.classList.toggle('open');
-            item.classList.toggle('active');
-        }
-    });
-});
-
+function toggleMenu() {
+    document.getElementById('nav-menu').classList.toggle('active');
+  }
+  
 // Function to update the time
 function updateTime() {
     const timeElement = document.getElementById('time');
@@ -119,7 +103,7 @@ function showMessage() {
     alert('This website is made by PaulTheBest1000™');
 }
 
-const musicFiles = [
+const musicFiles = [ 
     { title: 'Panzerlied - German Military March [Music Box]', file: 'PanzerliedGerman Military March [Music Box].mp3' },
     { title: 'Erika - German Military March Music Box', file: 'yt1s.com - ErikaGerman Military March Music Box.mp3' },
     { title: 'Westerwaldlied - German Military Song Music Box', file: 'yt1s.com - WesterwaldliedGerman Military Song Music Box.mp3' }
@@ -131,45 +115,44 @@ const nowPlaying = document.getElementById('now-playing');
 
 let playedSongs = [];
 
-// Function to change the audio to a random file and update "Now Playing"
+// Play random music
 function playRandomMusic() {
-    // Filter out the songs that have already been played
     const remainingSongs = musicFiles.filter(song => !playedSongs.includes(song.title));
     
     if (remainingSongs.length === 0) {
-        // If all songs have been played, reset the playedSongs list
         playedSongs = [];
     }
 
-    // Pick a random song from the remaining ones
     const randomIndex = Math.floor(Math.random() * remainingSongs.length);
     const selectedMusic = remainingSongs[randomIndex];
-
-    // Update the playedSongs array
     playedSongs.push(selectedMusic.title);
 
     audioSource.src = selectedMusic.file;
-    audio.load();  // Load the new audio file
-
-    // Update "Now Playing" text with the music title
+    audio.load();
     nowPlaying.textContent = `Now Playing: ${selectedMusic.title}`;
-
-    // Play the selected music
-    audio.play();
+    audio.play().catch(err => {
+        console.log("Autoplay blocked or error:", err);
+    });
 }
 
-// Add event listener to body to toggle play/pause when the user clicks anywhere
-document.body.addEventListener('click', function() {
+// Play on load (after user interaction for autoplay policies)
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        playRandomMusic();
+    }, 100); // Small delay to ensure elements are loaded
+});
+
+// Toggle music only if click is not on a button or link
+document.body.addEventListener('click', function(e) {
+    const tag = e.target.tagName.toLowerCase();
+    if (tag === 'button' || tag === 'a') return;
+
     if (audio.paused) {
-        // If audio is paused, start a random song
         playRandomMusic();
     } else {
-        // If audio is playing, pause it
         audio.pause();
     }
 });
 
-// When the music ends, pick another random song to play
-audio.addEventListener('ended', function() {
-    playRandomMusic();
-});
+// Play next song when current one ends
+audio.addEventListener('ended', playRandomMusic);
