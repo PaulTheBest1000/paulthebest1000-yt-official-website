@@ -204,10 +204,13 @@ p5 {
 }
 
 .button1 {
+    display: inline-block;
     background-color: #b30000;
     color: greenyellow;
-    border: none;
     padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -217,10 +220,13 @@ p5 {
 }
 
 .button2 {
+    display: inline-block;
     background-color: #0000b3;
     color: limegreen;
-    border: none;
     padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -230,10 +236,13 @@ p5 {
 }
 
 .button3 {
+    display: inline-block;
     background-color: #00b300;
     color: yellow;
-    border: none;
     padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -379,5 +388,20 @@ p5 {
         .item {
           flex: 1 1 100%; /* Make items full width on small screens */
         }
+      }
+      
+      .download-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+      
+      .download-btn:hover {
+        background-color: #45a049;
       }
       
