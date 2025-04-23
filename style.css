@@ -26,7 +26,7 @@ body, ul, li {
 
 .menu a {
     text-decoration: none;
-    color: white;
+    color: lightgray;
     padding: 10px 15px;
     font-size: 16px;
     display: inline-block;
@@ -41,9 +41,9 @@ body, ul, li {
 
 /* Active Link Styling */
 .menu a.active {
-    color: cyan;
+    color: limegreen;
     font-weight: bold;
-    border-bottom: 2px solid cyan;
+    border-bottom: 2px solid limegreen;
 }
 
 /* Hover Underline Effect */
@@ -52,7 +52,7 @@ body, ul, li {
     position: absolute;
     width: 0;
     height: 2px;
-    background: white;
+    background: lightgray;
     bottom: -5px;
     left: 50%;
     transition: all 0.3s ease;
@@ -89,7 +89,7 @@ body, ul, li {
 }
 
 .dropdown a {
-    color: white;
+    color: lightgray;
     padding: 10px 20px;
     font-size: 14px;
     display: block;
