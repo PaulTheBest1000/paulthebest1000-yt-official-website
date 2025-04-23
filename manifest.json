@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "PC Usage Alarm",
+  "version": "1.0",
+  "description": "Set a time limit for PC usage and play an alarm sound when exceeded.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "alarms",
+    "notifications"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": {
+      "script-src": "'self'",
+      "object-src": "'self'"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
