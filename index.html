@@ -59,12 +59,17 @@
 </section>
 
 <script>
-fetch('/get-subscriber-count')
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('count').textContent = `${data.subscriberCount} Subscribers`;
-    })
-    .catch(() => document.getElementById('count').textContent = 'Error fetching data');
+    // Replace with your actual API Key and Channel ID
+    const apiKey = 'AIzaSyC2lr9udYtnmq9a2gGT9WX9YSajEnt_C3c'; // Replace with your API key
+    const channelId = 'UCe4H2F2AWwItE23ookYaGag'; // Replace with your YouTube Channel ID
+
+    fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            const count = data.items[0].statistics.subscriberCount;
+            document.getElementById('count').textContent = `${count} Subscribers`;
+        })
+        .catch(() => document.getElementById('count').textContent = 'Error fetching data');
 </script>
 
  <!-- Music Player -->
