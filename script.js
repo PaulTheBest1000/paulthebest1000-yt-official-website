@@ -112,47 +112,69 @@ const musicFiles = [
 const audio = document.getElementById('background-music');
 const audioSource = document.getElementById('audio-source');
 const nowPlaying = document.getElementById('now-playing');
+const playBtn = document.getElementById('play-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const nextBtn = document.getElementById('next-btn');
+const prevBtn = document.getElementById('prev-btn');
+const playlist = document.getElementById('playlist');
 
-let playedSongs = [];
+let currentIndex = 0;
 
-// Play random music
-function playRandomMusic() {
-    const remainingSongs = musicFiles.filter(song => !playedSongs.includes(song.title));
-    
-    if (remainingSongs.length === 0) {
-        playedSongs = [];
-    }
-
-    const randomIndex = Math.floor(Math.random() * remainingSongs.length);
-    const selectedMusic = remainingSongs[randomIndex];
-    playedSongs.push(selectedMusic.title);
-
-    audioSource.src = selectedMusic.file;
+// Load a song by index
+function loadMusic(index) {
+    const song = musicFiles[index];
+    audioSource.src = song.file;
     audio.load();
-    nowPlaying.textContent = `Now Playing: ${selectedMusic.title}`;
-    audio.play().catch(err => {
-        console.log("Autoplay blocked or error:", err);
-    });
+    nowPlaying.textContent = `Now Playing: ${song.title}`;
 }
 
-// Play on load (after user interaction for autoplay policies)
+// Play music
+function playMusic() {
+    audio.play().catch(err => console.log("Autoplay blocked:", err));
+}
+
+// Pause music
+function pauseMusic() {
+    audio.pause();
+}
+
+// Next track
+function nextMusic() {
+    currentIndex = (currentIndex + 1) % musicFiles.length;
+    loadMusic(currentIndex);
+    playMusic();
+}
+
+// Previous track
+function prevMusic() {
+    currentIndex = (currentIndex - 1 + musicFiles.length) % musicFiles.length;
+    loadMusic(currentIndex);
+    playMusic();
+}
+
+// Auto-play next when current ends
+audio.addEventListener('ended', nextMusic);
+
+// Attach button events
+playBtn.addEventListener('click', playMusic);
+pauseBtn.addEventListener('click', pauseMusic);
+nextBtn.addEventListener('click', nextMusic);
+prevBtn.addEventListener('click', prevMusic);
+
+// Build playlist UI
+musicFiles.forEach((song, index) => {
+    const li = document.createElement('li');
+    li.textContent = song.title;
+    li.style.cursor = 'pointer';
+    li.addEventListener('click', () => {
+        currentIndex = index;
+        loadMusic(currentIndex);
+        playMusic();
+    });
+    playlist.appendChild(li);
+});
+
+// Load first track on startup
 window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        playRandomMusic();
-    }, 100); // Small delay to ensure elements are loaded
+    loadMusic(currentIndex);
 });
-
-// Toggle music only if click is not on a button or link
-document.body.addEventListener('click', function(e) {
-    const tag = e.target.tagName.toLowerCase();
-    if (tag === 'button' || tag === 'a') return;
-
-    if (audio.paused) {
-        playRandomMusic();
-    } else {
-        audio.pause();
-    }
-});
-
-// Play next song when current one ends
-audio.addEventListener('ended', playRandomMusic);
