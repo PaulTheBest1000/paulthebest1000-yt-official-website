@@ -49,26 +49,27 @@ if ('serviceWorker' in navigator) {
   // Optionally, check every minute
   setInterval(checkOfflinePeriod, 60000);
   
-// Example: Highlight the active menu item on click
-document.querySelectorAll('.menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        document.querySelector('.menu a.active')?.classList.remove('active');
-        link.classList.add('active');
-    });
-});
+  // Select the hamburger button and menu
+  const menuToggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.menu');
 
-document.querySelectorAll('.menu li').forEach(item => {
-    item.addEventListener('click', () => {
-        const dropdown = item.querySelector('.dropdown');
-        if (dropdown) {
-            dropdown.classList.toggle('open');
-        }
-    });
-});
+  // Toggle the 'active' class on click
+  menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('active');
+  });
 
-function toggleMenu() {
-    document.getElementById('nav-menu').classList.toggle('active');
-  }
+  // Optional: Toggle dropdowns on mobile when clicking a parent item
+  const menuItems = document.querySelectorAll('.menu-item > a');
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault(); // Prevent default link behavior
+        const parentLi = item.parentElement;
+        parentLi.classList.toggle('active');
+      }
+    });
+  });
   
 // Function to update the time
 function updateTime() {

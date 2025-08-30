@@ -12,18 +12,27 @@ body, ul, li {
     list-style: none;
 }
 
-.menu {
+header {
+    position: relative; /* keeps hamburger aligned inside header */
+    width: 100%;
+}
+
+/* Menu Styling */
+.menu { 
     display: flex;
     gap: 20px;
     background: #333;
     padding: 10px 20px;
-    justify-content: center;
+    justify-content: center; /* fills the header */
+    width: 100%; /* ensures full width */
+    transition: max-height 0.3s ease;
 }
 
 .menu li {
     position: relative;
 }
 
+/* Links */
 .menu a {
     text-decoration: none;
     color: lightgray;
@@ -39,14 +48,14 @@ body, ul, li {
     border-radius: 5px;
 }
 
-/* Active Link Styling */
+/* Active Link */
 .menu a.active {
     color: limegreen;
     font-weight: bold;
     border-bottom: 2px solid limegreen;
 }
 
-/* Hover Underline Effect */
+/* Hover underline */
 .menu a::after {
     content: '';
     position: absolute;
@@ -55,8 +64,8 @@ body, ul, li {
     background: lightgray;
     bottom: -5px;
     left: 50%;
-    transition: all 0.3s ease;
     transform: translateX(-50%);
+    transition: all 0.3s ease;
 }
 
 .menu a:hover::after {
@@ -71,9 +80,8 @@ body, ul, li {
     left: 0;
     background-color: #444;
     border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 10px 0;
-    z-index: 1000;
     min-width: 200px;
     opacity: 0;
     visibility: hidden;
@@ -100,7 +108,22 @@ body, ul, li {
     background-color: #575757;
 }
 
-/* Responsive Menu */
+/* Hamburger Button */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: yellowgreen;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    z-index: 1001;
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
     .menu {
         flex-direction: column;
@@ -129,34 +152,13 @@ body, ul, li {
         display: none;
     }
 
-    .menu li.active .dropdown {
+    .menu-item.active .dropdown {
         display: block;
     }
-}
 
-/* Hamburger Button */
-.menu-toggle {
-    display: none;
-    font-size: 24px;
-    color: yellowgreen;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    position: absolute;
-    top: 5px;
-    right: 20px;
-    z-index: 1001;
-}
-
-@media (max-width: 768px) {
     .menu-toggle {
         display: block;
     }
-}
-
-.menu {
-    transition: max-height 0.3s ease;
 }
 
 /* Basic styling for the time and calendar */
@@ -174,12 +176,12 @@ body, ul, li {
 
 /* Optional: Add a background color for the time */
 #time {
-    background-color: #dcdcdc;
+    background-color: darkgray;
 }
 
 /* Optional: Style the calendar */
 #calendar {
-    background-color: #e9e9e9;
+    background-color: darkgray;
 }
 
 h1 {
@@ -201,6 +203,9 @@ p4 {
 
 p5 {
     color:red
+}
+p6 {
+    color:gray
 }
 
 .button1 {
@@ -320,6 +325,24 @@ p5 {
 
 .super-mechs:hover {
     background-color: #a7a745;
+    color: white;
+}
+
+/* Spaceflight Simulator Button */
+.spaceflight-simulator {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 18px;
+    color: #1c1c1e;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 2px solid #1c1c1e;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.spaceflight-simulator:hover {
+    background-color: #2e2e2e; /* Lighter Space Gray */
     color: white;
 }
 
