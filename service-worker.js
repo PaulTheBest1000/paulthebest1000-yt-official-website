@@ -2,11 +2,16 @@
 
 const CACHE_NAME = 'offline-cache';
 const urlsToCache = [
-    '/',
-    '/index.html', // Adjust to your homepage and other files
-    '/styles.css',
+    '/bored.html', // Adjust to your homepage and other files
+    '/discord.html',
+    '/index.html',
     '/script.js',
-    '/offline.html', // A page to show when offline
+    '/spaceflight-simulator.html',
+    '/styles.css',
+    '/super-mechs.html',
+    '/videos.html',
+    '/war-thunder.html',
+    '/youtube.html',
     // Add other static resources you want to cache
 ];
 

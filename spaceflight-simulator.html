@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spaceflight Simulator - PaulTheBest1000</title>
@@ -9,9 +11,36 @@
 </head>
 <body>
     <header>
-        <a href="videos.html" class="back-videos">← Back to Videos</a>
-        <h1>Spaceflight Simulator Content</h1>
-    </header>
+        <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+        <nav>
+          <ul class="menu" id="nav-menu">
+            <li>
+              <a href="index.html"><i class="fa fa-home" style="color: #00FFFF;"></i> Home</a>
+              <ul class="dropdown">
+                <li><a href="bored.html"><i class="fa fa-user" style="color: #808080;"></i> Bored?</a></li>
+              </ul>
+            </li>
+      
+            <li>
+              <a href="videos.html"><i class="fa fa-desktop" style="color: #00FF00;"></i> Videos</a>
+              <ul class="dropdown">
+                <li><a href="super-mechs.html"><i class="fa fa-robot" style="color: #a7a745;"></i> Super Mechs</a></li>
+                <li><a href="spaceflight-simulator.html"><i class="fa fa-rocket" style="color: #1c1c1e;"></i> Spaceflight Simulator</a></li>
+                <li><a href="war-thunder.html"><i class="fa fa-gun" style="color: #a72845;"></i> War Thunder</a></li>
+              </ul>
+            </li>
+      
+            <li><a href="youtube.html"><i class="fa-brands fa-youtube" style="color: #FF0000;"></i> YouTube</a></li>
+      
+            <li><a href="discord.html"><i class="fa-brands fa-discord" style="color: #7289DA;"></i> Discord</a></li>
+          </ul>
+        </nav>
+      </header>
+      
+        <div id="time"></div> <!-- Time display -->
+        <div id="calendar"></div> <!-- Calendar display -->
+        
+    <h1>Spaceflight Simulator Content</h1>
     <p><p6 style="font-size: 30px;">All my Spaceflight Simulator-related content is here.</p6></p>
         <p>SFS Space Station Test</p>
     <section id="video-gallery">
@@ -32,5 +61,6 @@
             <iframe src="https://www.youtube.com/embed/ UNz552lYtW4" frameborder="0" allowfullscreen></iframe>
         </div>
     </section>
+    <script src="script.js"></script>
 </body>
 </html>

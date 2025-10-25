@@ -2,7 +2,7 @@
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
+        navigator.serviceWorker.register('service-worker.js')
             .then((registration) => {
                 console.log('Service Worker registered with scope:', registration.scope);
             })
@@ -14,15 +14,15 @@ if ('serviceWorker' in navigator) {
   
   // main.js (or your script.js file)
   
-  const startOfflineTime = new Date();
-  startOfflineTime.setHours(12, 0, 0, 0); // Set 12:00 PM
-  
-  const endOfflineTime = new Date();
-  endOfflineTime.setHours(19, 30, 0, 0); // Set 7:30 PM
-  
   function checkOfflinePeriod() {
       const currentTime = new Date();
   
+      const startOfflineTime = new Date();
+      startOfflineTime.setHours(22, 30, 0, 0); // Set 10:30 PM or 22:30
+  
+      const endOfflineTime = new Date();
+      endOfflineTime.setHours(6, 0, 0, 0); // Set 6:00 PM or 06:00
+
       // Check if the current time is between the offline start and end time
       if (currentTime >= startOfflineTime && currentTime <= endOfflineTime) {
           // Enable offline behavior
@@ -34,12 +34,14 @@ if ('serviceWorker' in navigator) {
   }
   
   function enableOfflineMode() {
-      console.log("Website is in offline mode.");
+      document.body.classList.add("offline-mode");
+      console.log("Website is in offline mode 📴");
       // Optionally, show a message or activate service worker's caching behavior
   }
   
   function disableOfflineMode() {
-      console.log("Website is back online.");
+      document.body.classList.remove("offline-mode");
+      console.log("Website is back online 🌐");
       // Reset to normal behavior
   }
   
