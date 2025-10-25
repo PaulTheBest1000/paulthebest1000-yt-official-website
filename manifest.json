@@ -1,7 +1,7 @@
 {
     "name": "PaulTheBest1000 YT Official Website",
     "short_name": "PTB1000 YT Site",
-    "start_url": "./?pwa=true",
+    "start_url": "/paulthebest1000-yt-official-website/?pwa=true",
     "display": "standalone",
     "background_color": "dimgray",
     "theme_color": "#1c1c1e",
