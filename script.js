@@ -14,43 +14,28 @@ if ('serviceWorker' in navigator) {
   
   // main.js (or your script.js file)
   
-  function checkOfflinePeriod() {
-      const currentTime = new Date();
   
-      const startOfflineTime = new Date();
-      startOfflineTime.setHours(22, 30, 0, 0); // Set 10:30 PM or 22:30
-  
-      const endOfflineTime = new Date();
-      endOfflineTime.setHours(6, 0, 0, 0); // Set 6:00 PM or 06:00
+let deferredPrompt;
 
-      // Check if the current time is between the offline start and end time
-      if (currentTime >= startOfflineTime && currentTime <= endOfflineTime) {
-          // Enable offline behavior
-          enableOfflineMode();
-      } else {
-          // Disable offline behavior
-          disableOfflineMode();
-      }
-  }
-  
-  function enableOfflineMode() {
-      document.body.classList.add("offline-mode");
-      console.log("Website is in offline mode 📴");
-      // Optionally, show a message or activate service worker's caching behavior
-  }
-  
-  function disableOfflineMode() {
-      document.body.classList.remove("offline-mode");
-      console.log("Website is back online 🌐");
-      // Reset to normal behavior
-  }
-  
-  // Check if the site should be offline immediately
-  checkOfflinePeriod();
-  
-  // Optionally, check every minute
-  setInterval(checkOfflinePeriod, 60000);
-  
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Stop Chrome from auto-showing the prompt
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Show a custom button or message
+  const installBtn = document.getElementById('install-btn');
+  installBtn.style.display = 'block';
+
+  installBtn.addEventListener('click', async () => {
+    installBtn.style.display = 'none';
+    deferredPrompt.prompt();
+
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to install: ${outcome}`);
+    deferredPrompt = null;
+  });
+});
+
   // Select the hamburger button and menu
   const menuToggle = document.querySelector('.menu-toggle');
   const menu = document.querySelector('.menu');
