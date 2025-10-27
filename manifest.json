@@ -23,13 +23,19 @@
         "form_factor": "narrow"
       },
       {
-        "src": "Screenshot-003.png",
+        "src": "Screenshot-003.jpg",
+        "sizes": "1080x1920",
+        "type": "image/jpg",
+        "form_factor": "narrow"
+      },
+      {
+        "src": "Screenshot-004.png",
         "sizes": "1920x1080",
         "type": "image/png",
         "form_factor": "wide"
       },
       {
-        "src": "Screenshot-004.png",
+        "src": "Screenshot-005.png",
         "sizes": "1920x1080",
         "type": "image/png",
         "form_factor": "wide"
