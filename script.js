@@ -13,28 +13,13 @@ if ('serviceWorker' in navigator) {
   }
   
   // main.js (or your script.js file)
-  
-  
-let deferredPrompt;
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Stop Chrome from auto-showing the prompt
-  e.preventDefault();
-  deferredPrompt = e;
-
-  // Show a custom button or message
-  const installBtn = document.getElementById('install-btn');
-  installBtn.style.display = 'block';
-
-  installBtn.addEventListener('click', async () => {
-    installBtn.style.display = 'none';
-    deferredPrompt.prompt();
-
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response to install: ${outcome}`);
-    deferredPrompt = null;
+  // You don’t need to manually handle beforeinstallprompt anymore!
+  window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('beforeinstallprompt event fired');
+    // Do NOT call e.preventDefault()
+    // Chrome will automatically show the install banner
   });
-});
 
   // Select the hamburger button and menu
   const menuToggle = document.querySelector('.menu-toggle');
@@ -166,3 +151,32 @@ musicFiles.forEach((song, index) => {
 window.addEventListener('DOMContentLoaded', () => {
     loadMusic(currentIndex);
 });
+
+    // Replace with your actual API Key and Channel ID
+    const apiKey = 'AIzaSyC2lr9udYtnmq9a2gGT9WX9YSajEnt_C3c'; // Replace with your API key
+    const channelId = 'UCe4H2F2AWwItE23ookYaGag'; // Replace with your YouTube Channel ID
+
+    fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`)
+    .then(response => response.json())
+    .then(data => {
+      const channel = data.items[0];
+      const snippet = channel.snippet;
+      const stats = channel.statistics;
+
+      // Update subscriber count
+      document.getElementById('count').textContent = `${stats.subscriberCount} Subscribers`;
+
+      // Update channel image
+      const img = document.getElementById('channel-image');
+      img.src = snippet.thumbnails.high.url;
+      img.alt = snippet.title;
+
+      // Update caption with channel name
+      document.getElementById('channel-caption').textContent = `This is what ${snippet.title} looks like right now!`;
+    })
+    .catch(error => {
+      console.error('Error fetching channel data:', error);
+      document.getElementById('count').textContent = 'Error fetching data';
+      document.getElementById('channel-caption').textContent = 'Couldn’t fetch mech details!';
+    });
+    

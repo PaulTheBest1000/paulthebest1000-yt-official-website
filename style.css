@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color:dimgray;
+    background: linear-gradient(180deg, dimgray, gray);
     text-align: center;
     padding: 20px;
 }
@@ -442,8 +442,18 @@ p6 {
     max-width: 500px;
     margin: 20px auto;
     box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    animation: borderGlow 2s ease-in-out infinite alternate;
 }
 
+@keyframes borderGlow {
+    0% {
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* 50% glow */
+    }
+    100% {
+      box-shadow: 0 0 25px rgba(0, 255, 0, 1); /* 100% glow */
+    }
+  }
+  
 #music-player #now-playing {
     font-size: 18px;
     margin-bottom: 10px;
