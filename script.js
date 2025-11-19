@@ -152,31 +152,32 @@ window.addEventListener('DOMContentLoaded', () => {
     loadMusic(currentIndex);
 });
 
-    // Replace with your actual API Key and Channel ID
-    const apiKey = 'AIzaSyC2lr9udYtnmq9a2gGT9WX9YSajEnt_C3c'; // Replace with your API key
-    const channelId = 'UCe4H2F2AWwItE23ookYaGag'; // Replace with your YouTube Channel ID
+const workerURL = "https://yt-proxy.paulandsam1000.workers.dev/"; // Your Worker URL
 
-    fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`)
-    .then(response => response.json())
-    .then(data => {
-      const channel = data.items[0];
-      const snippet = channel.snippet;
-      const stats = channel.statistics;
+fetch(workerURL)
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      console.error("Worker error:", data.error);
+      document.getElementById('count').textContent = "Error fetching data";
+      document.getElementById('channel-caption').textContent = "Couldn’t fetch channel info!";
+      return;
+    }
 
-      // Update subscriber count
-      document.getElementById('count').textContent = `${stats.subscriberCount} Subscribers`;
+    // Update subscriber count
+    document.getElementById('count').textContent = `${data.subscriberCount} Subscribers`;
 
-      // Update channel image
-      const img = document.getElementById('channel-image');
-      img.src = snippet.thumbnails.high.url;
-      img.alt = snippet.title;
+    // Update channel image
+    const img = document.getElementById('channel-image');
+    img.src = data.thumbnail;
+    img.alt = data.title;
 
-      // Update caption with channel name
-      document.getElementById('channel-caption').textContent = `This is what ${snippet.title} looks like right now!`;
-    })
-    .catch(error => {
-      console.error('Error fetching channel data:', error);
-      document.getElementById('count').textContent = 'Error fetching data';
-      document.getElementById('channel-caption').textContent = 'Couldn’t fetch mech details!';
-    });
-    
+    // Update caption with channel name
+    document.getElementById('channel-caption').textContent =
+      `This is what ${data.title} looks like right now!`;
+  })
+  .catch(error => {
+    console.error("Error fetching YouTube data:", error);
+    document.getElementById('count').textContent = "Error fetching data";
+    document.getElementById('channel-caption').textContent = "Couldn’t fetch channel info!";
+  });
