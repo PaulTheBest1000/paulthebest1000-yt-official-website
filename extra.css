@@ -51,6 +51,10 @@
     animation: rgbCycle 3s linear infinite; /* optional RGB animation */
   }
   
+  #count {
+    background: linear-gradient(180deg, rgba(105,105,105,0.5), rgba(128,128,128,0.5));
+    border-radius: 12px;
+  }
   @keyframes rgbCycle {
     0%   { color: red; }
     33%  { color: green; }
