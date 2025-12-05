@@ -27,16 +27,27 @@ self.addEventListener('install', (event) => {
 });
 
 // Fetch event to serve cached resources when offline
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
+    const url = new URL(event.request.url);
+
+    // 🚫 Skip YouTube embed & image/video requests
+    if (
+        url.hostname === "www.youtube.com" ||
+        url.hostname === "youtube.com" ||
+        url.hostname === "i.ytimg.com" ||
+        url.hostname === "s.ytimg.com"
+    ) {
+        return; // Let browser handle it normally — no caching
+    }
+
+    // ✅ Normal caching behavior for the rest of the site
     event.respondWith(
-        caches.match(event.request)
-            .then((cachedResponse) => {
-                // If cached response exists, return it, else fetch from network
-                return cachedResponse || fetch(event.request);
-            })
+        caches.match(event.request).then((cachedResponse) => {
+            return cachedResponse || fetch(event.request);
+        })
     );
 });
-
+ 
 // Activate event to clear old caches if needed
 self.addEventListener('activate', (event) => {
     const cacheWhitelist = [CACHE_NAME];
