@@ -2,7 +2,6 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(180deg, dimgray, gray);
     text-align: center;
-    padding: 20px;
 }
 
 /* Base Styles */
@@ -24,7 +23,8 @@ header {
     display: flex;
     gap: 20px;
     background: #333;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     justify-content: space-around; /* fills the header differently */
     width: 100%; /* ensures full width */
     transition: max-height 0.3s ease;
@@ -35,8 +35,14 @@ header {
     font-size: 18px;
 }
 
+/* Icon styling */
+.menu i {
+    margin-right: 8px; /* Adds space between the icon and the text */
+}
+
 /* Links */
 .menu a {
+    position: relative;
     text-decoration: none;
     color: lightgray;
     padding: 10px 15px;
@@ -77,18 +83,19 @@ header {
 
 /* Dropdown Styling */
 .dropdown {
-    display: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%;                 /* move to center */
+    transform: translateX(-50%) translateY(-10px); /* pull back by half */
     background-color: #444;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 10px 0;
-    min-width: 200px;
+    min-width: max-content; /* auto-size to the largest item */
+    overflow: hidden;
+    box-sizing: border-box;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
 }
 
@@ -96,7 +103,7 @@ header {
     display: block;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0); /* animate dropdown */
 }
 
 .dropdown a {
@@ -542,5 +549,50 @@ p6 {
     padding: 10px 20px;
     border-radius: 10px;
     z-index: 9999;
+  }
+  
+  .responsive-images {
+    display: flex;
+    flex-wrap: wrap;       /* allows images to stack on small screens */
+    gap: 10px;             /* space between images */
+    justify-content: center; /* center images on larger screens */
+  }
+  
+  .responsive-images img {
+    width: 100%;          /* default full width for mobile */
+    max-width: 500px;     /* cap width for larger screens */
+    height: auto;         /* keep aspect ratio */
+    border-radius: 8px;   /* optional: rounded corners */
+  }
+
+  .responsive-figure {
+    display: flex;
+    flex-direction: column; /* stack image and caption */
+    align-items: center;    /* center content */
+    max-width: 300px;       /* optional: limits width on large screens */
+    margin: 20px auto;      /* center on page */
+    text-align: center;     /* caption centered */
+  }
+  
+  .responsive-figure img {
+    width: 100%;   /* scale image to container */
+    height: auto;  /* maintain aspect ratio */
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  .responsive-figure figcaption {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    animation: rgbCycle 0.5s linear infinite;
+    animation-timing-function: ease-in-out;
+  }
+  
+  @keyframes rgbCycle {
+    0%   { color: red; }
+    33%  { color: green; }
+    66%  { color: blue; }
+    100% { color: red; }
   }
   

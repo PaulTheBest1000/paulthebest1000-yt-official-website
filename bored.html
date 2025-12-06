@@ -68,45 +68,44 @@
     <p>Here’s something to keep you entertained for now!</p>
     </div>
 
-    <div id="music-player">
-      <p id="now-playing">Now Playing: </p>
-      <audio id="background-music" controls>
-          <source id="audio-source" src="" type="audio/mpeg">
-          Your browser does not support the audio element.
-      </audio>
-      <div>
-          <button id="prev-btn">⏮ Previous</button>
-          <button id="play-btn">▶ Play</button>
-          <button id="pause-btn">⏸ Pause</button>
-          <button id="next-btn">⏭ Next</button>
-      </div>
-      <h3>Current Playlist</h3>
-      <ul id="playlist"></ul>
-    </div>
+  <!-- Image container -->
+  <div class="responsive-images">
+    <img src="IMG_9924.JPG"
+         alt="Responsive Image">
+
+    <img src="IMG_9931.JPG"
+         alt="Responsive Image">
+  </div>
+
+  <figure id="channel-profile" class="responsive-figure">
+    <img id="channel-image"
+         src="IMG_2601.JPG"
+         alt="Channel Profile"
+         title="My current mech"
+         loading="lazy">
+    <figcaption id="channel-caption">
+      Fetching your mech's latest look...
+    </figcaption>
+  </figure>
 
     <div id="bored"><p><p4 style="font-size: 45px;">And pls don't be bored</p4></p>
-    <p><p3><img src="IMG_9924 (2).jpg"
-        srcset="IMG_9924 (1).jpg 768w, IMG_9924.JPG 1200w" 
-        sizes="(max-width: 768px) 100vw, 50vw" 
-        alt="Responsive Image"></p3></p>
-    <p><p5><img src="IMG_9931 (2).jpg"
-        srcset="IMG_9931 (1).jpg 768w, IMG_9931.JPG 1200w" 
-        sizes="(max-width: 768px) 100vw, 50vw" 
-        alt="Responsive Image"></p5></p>
-        
-    <figure id="channel-profile">
-      <p>
-        <img id="channel-image"
-             src="IMG_2601 (2).jpg"
-             srcset="IMG_2601 (1).jpg 768w, IMG_2601.JPG 1200w"
-             sizes="(max-width: 768px) 100vw, 50vw"
-             alt="Channel Profile"
-             title="My current mech"
-             loading="lazy">
-        <figcaption id="channel-caption">Fetching your mech's latest look...</figcaption>
-      </p>
-    </figure>
+      <div id="music-player">
+        <p id="now-playing">Now Playing: </p>
+        <audio id="background-music" controls>
+            <source id="audio-source" src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div>
+            <button id="prev-btn">⏮ Previous</button>
+            <button id="play-btn">▶ Play</button>
+            <button id="pause-btn">⏸ Pause</button>
+            <button id="next-btn">⏭ Next</button>
+        </div>
+        <h3>Current Playlist</h3>
+        <ul id="playlist"></ul>
+      </div>
 
     <script src="script.js"></script>
+  <script src="extra.js"></script>
 </body>
 </html>

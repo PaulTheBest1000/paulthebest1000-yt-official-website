@@ -1,19 +1,5 @@
-/* Icon styling */
-.menu i {
-    margin-right: 8px; /* Adds space between the icon and the text */
-}
 
-/* Hover effect */
-.menu a:hover {
-    background-color: #555;
-}
-
-/* Optional: Active link (if you want to highlight the current page) */
-.menu a.active {
-    background-color: #007BFF; /* Blue background for active item */
-    color: white;
-}
-
+/* RGB effect */
 .rgb-cycle {
     font-weight: bold;
     animation: rgbCycle 0.5s linear infinite;
@@ -30,7 +16,7 @@
   #sub-count {
     background-color: #ff0000; /* YouTube red */
     color: white;
-    padding: 20px 320px;
+    padding: 20px 40px;
     border-radius: 12px;
     display: inline-block;
     text-align: center;
@@ -49,10 +35,11 @@
     font-weight: bold;
     letter-spacing: -1px;
     animation: rgbCycle 3s linear infinite; /* optional RGB animation */
+    animation-timing-function: ease-in-out;
   }
   
   #count {
-    background: linear-gradient(180deg, rgba(105,105,105,0.5), rgba(128,128,128,0.5));
+    background: linear-gradient(180deg, rgba(105,105,105,0.75), rgba(128,128,128,0.75));
     border-radius: 12px;
   }
   @keyframes rgbCycle {

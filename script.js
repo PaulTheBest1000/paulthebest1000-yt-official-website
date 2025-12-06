@@ -151,33 +151,3 @@ musicFiles.forEach((song, index) => {
 window.addEventListener('DOMContentLoaded', () => {
     loadMusic(currentIndex);
 });
-
-const workerURL = "https://yt-proxy.paulandsam1000.workers.dev/"; // Your Worker URL
-
-fetch(workerURL)
-  .then(response => response.json())
-  .then(data => {
-    if (data.error) {
-      console.error("Worker error:", data.error);
-      document.getElementById('count').textContent = "Error fetching data";
-      document.getElementById('channel-caption').textContent = "Couldn’t fetch channel info!";
-      return;
-    }
-
-    // Update subscriber count
-    document.getElementById('count').textContent = `${data.subscriberCount} Subscribers`;
-
-    // Update channel image
-    const img = document.getElementById('channel-image');
-    img.src = data.thumbnail;
-    img.alt = data.title;
-
-    // Update caption with channel name
-    document.getElementById('channel-caption').textContent =
-      `This is what ${data.title} looks like right now!`;
-  })
-  .catch(error => {
-    console.error("Error fetching YouTube data:", error);
-    document.getElementById('count').textContent = "Error fetching data";
-    document.getElementById('channel-caption').textContent = "Couldn’t fetch channel info!";
-  });
