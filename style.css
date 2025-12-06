@@ -232,7 +232,8 @@ header {
     
 h1 {
     display: inline-block;
-    margin-top: 50px; /* Moves the h1 50px down */   
+    border-radius: 5px; 
+    margin-top: 50px; /* Moves the h1 50px down */  
     background-color: rgba(128, 128, 128, 0.5);
 }
 
