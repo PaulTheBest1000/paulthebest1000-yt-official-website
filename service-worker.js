@@ -4,6 +4,8 @@ const CACHE_NAME = 'offline-cache';
 const urlsToCache = [
     '/bored.html', // Adjust to your homepage and other files
     '/discord.html',
+    '/extra.css',
+    '/extra.js',
     '/index.html',
     '/script.js',
     '/spaceflight-simulator.html',

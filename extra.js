@@ -29,3 +29,108 @@ fetch(workerURL)
       caption.textContent = `This is what ${data.title} looks like right now!`;
     }
   })
+
+  const musicFiles = [ 
+    { title: 'Panzerlied - German Military March [Music Box]', file: 'PanzerliedGerman Military March [Music Box].mp3' },
+    { title: 'Erika - German Military March Music Box', file: 'yt1s.com - ErikaGerman Military March Music Box.mp3' },
+    { title: 'Westerwaldlied - German Military Song Music Box', file: 'yt1s.com - WesterwaldliedGerman Military Song Music Box.mp3' }
+];
+
+const audio = document.getElementById('background-music');
+const audioSource = document.getElementById('audio-source');
+const nowPlaying = document.getElementById('now-playing');
+const playBtn = document.getElementById('play-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const nextBtn = document.getElementById('next-btn');
+const prevBtn = document.getElementById('prev-btn');
+const playlist = document.getElementById('playlist');
+
+let currentIndex = 0;
+
+// Load a song by index
+function loadMusic(index) {
+    const song = musicFiles[index];
+    audioSource.src = song.file;
+    audio.load();
+    nowPlaying.textContent = `Now Playing: ${song.title}`;
+}
+
+// Play music
+function playMusic() {
+    audio.play().catch(err => console.log("Autoplay blocked:", err));
+}
+
+// Pause music
+function pauseMusic() {
+    audio.pause();
+}
+
+// Next track
+function nextMusic() {
+    currentIndex = (currentIndex + 1) % musicFiles.length;
+    loadMusic(currentIndex);
+    playMusic();
+}
+
+// Previous track
+function prevMusic() {
+    currentIndex = (currentIndex - 1 + musicFiles.length) % musicFiles.length;
+    loadMusic(currentIndex);
+    playMusic();
+}
+
+// Auto-play next when current ends
+audio.addEventListener('ended', nextMusic);
+
+// Attach button events
+playBtn.addEventListener('click', playMusic);
+pauseBtn.addEventListener('click', pauseMusic);
+nextBtn.addEventListener('click', nextMusic);
+prevBtn.addEventListener('click', prevMusic);
+
+// Build playlist UI
+musicFiles.forEach((song, index) => {
+    const li = document.createElement('li');
+    li.textContent = song.title;
+    li.style.cursor = 'pointer';
+    li.addEventListener('click', () => {
+        currentIndex = index;
+        loadMusic(currentIndex);
+        playMusic();
+    });
+    playlist.appendChild(li);
+});
+
+// Load first track on startup
+window.addEventListener('DOMContentLoaded', () => {
+    loadMusic(currentIndex);
+});
+
+function showSecret() {
+    alert('You found the secret! Now DM PaulTheBest1000 YT for your surprise!');
+}
+
+// Make it blend perfectly with current background
+const easterEgg = document.getElementById('easter-egg');
+
+function updateEasterEggColor() {
+    if (!easterEgg) return;
+
+    // Check the current body class
+    if (document.body.classList.contains('dark-mode')) {
+        easterEgg.style.color = getComputedStyle(document.documentElement)
+                                .getPropertyValue('--bg-gradient-dark'); // blends in
+    } else {
+        easterEgg.style.color = getComputedStyle(document.documentElement)
+                                .getPropertyValue('--bg-gradient-light'); // blends in
+    }
+}
+
+// Run on page load
+updateEasterEggColor();
+
+// Update whenever mode toggles
+const toggle = document.getElementById('mode-toggle');
+if (toggle) {
+    toggle.addEventListener('click', updateEasterEggColor);
+}

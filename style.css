@@ -1,6 +1,44 @@
-body {
+:root {
+  /* Light mode gradient – soft gray, darker whites */
+  --bg-gradient-light: linear-gradient(135deg, #d9d9d9, #cfcfcf, #c4c4c4);
+
+  /* Dark mode gradient – medium gray */
+  --bg-gradient-dark: linear-gradient(135deg, #3a3a3a, #4a4a4a, #5a5a5a);
+
+  /* Text colors */
+  --text-light: #3a3a3a;  /* dark gray for readability on light background */
+  --text-dark: #d0d0d0;   /* light gray for readability on dark background */
+  }
+  
+  body.light-mode {
+    background: var(--bg-gradient-light);
+    color: var(--text-light);
+  }
+  
+  body.dark-mode {
+    background: var(--bg-gradient-dark);
+    color: var(--text-dark);
+  }
+  
+  /* Optional toggle button style */
+  #mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #2c3e50;
+    color: #fff;
+    font-weight: bold;
+    z-index: 100;
+  }
+
+  /* Smooth transition */
+  body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(180deg, dimgray, gray);
+    transition: background 0.5s ease, color 0.5s ease;
     text-align: center;
 }
 
@@ -175,28 +213,27 @@ header {
 #time, #calendar {
     font-family: 'Arial', sans-serif;
     font-size: 20px;
-    color: #333;
+    color: #1b4f72;
     margin: 20px;
     padding: 10px;
     text-align: center;
-    background-color: #f0f0f0;
+    background: linear-gradient(120deg, #f0f0f0, #a3cef1, #d1e8ff);
     border-radius: 5px;
     border: 1px solid #ccc;
-}
-
-/* Optional: Add a background color for the time */
-#time {
-    background-color: darkgray;
-}
-
-/* Optional: Style the calendar */
-#calendar {
-    background-color: darkgray;
-}
-
+    background-size: 200% 200%;
+    animation: gradientShift 10s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
 h1 {
+    display: inline-block;
     margin-top: 50px; /* Moves the h1 50px down */   
-    color: #FFFFFF;
+    background-color: rgba(128, 128, 128, 0.5);
 }
 
 p2 {

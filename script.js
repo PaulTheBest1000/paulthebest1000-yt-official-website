@@ -76,78 +76,22 @@ function showMessage() {
     alert('This website is made by PaulTheBest1000™');
 }
 
-const musicFiles = [ 
-    { title: 'Panzerlied - German Military March [Music Box]', file: 'PanzerliedGerman Military March [Music Box].mp3' },
-    { title: 'Erika - German Military March Music Box', file: 'yt1s.com - ErikaGerman Military March Music Box.mp3' },
-    { title: 'Westerwaldlied - German Military Song Music Box', file: 'yt1s.com - WesterwaldliedGerman Military Song Music Box.mp3' }
-];
+const toggle = document.getElementById('mode-toggle');
 
-const audio = document.getElementById('background-music');
-const audioSource = document.getElementById('audio-source');
-const nowPlaying = document.getElementById('now-playing');
-const playBtn = document.getElementById('play-btn');
-const pauseBtn = document.getElementById('pause-btn');
-const nextBtn = document.getElementById('next-btn');
-const prevBtn = document.getElementById('prev-btn');
-const playlist = document.getElementById('playlist');
+// Toggle light/dark mode
+toggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  document.body.classList.toggle('light-mode');
 
-let currentIndex = 0;
-
-// Load a song by index
-function loadMusic(index) {
-    const song = musicFiles[index];
-    audioSource.src = song.file;
-    audio.load();
-    nowPlaying.textContent = `Now Playing: ${song.title}`;
-}
-
-// Play music
-function playMusic() {
-    audio.play().catch(err => console.log("Autoplay blocked:", err));
-}
-
-// Pause music
-function pauseMusic() {
-    audio.pause();
-}
-
-// Next track
-function nextMusic() {
-    currentIndex = (currentIndex + 1) % musicFiles.length;
-    loadMusic(currentIndex);
-    playMusic();
-}
-
-// Previous track
-function prevMusic() {
-    currentIndex = (currentIndex - 1 + musicFiles.length) % musicFiles.length;
-    loadMusic(currentIndex);
-    playMusic();
-}
-
-// Auto-play next when current ends
-audio.addEventListener('ended', nextMusic);
-
-// Attach button events
-playBtn.addEventListener('click', playMusic);
-pauseBtn.addEventListener('click', pauseMusic);
-nextBtn.addEventListener('click', nextMusic);
-prevBtn.addEventListener('click', prevMusic);
-
-// Build playlist UI
-musicFiles.forEach((song, index) => {
-    const li = document.createElement('li');
-    li.textContent = song.title;
-    li.style.cursor = 'pointer';
-    li.addEventListener('click', () => {
-        currentIndex = index;
-        loadMusic(currentIndex);
-        playMusic();
-    });
-    playlist.appendChild(li);
+  // Save user preference
+  localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
 });
 
-// Load first track on startup
-window.addEventListener('DOMContentLoaded', () => {
-    loadMusic(currentIndex);
-});
+// Load saved preference
+if(localStorage.getItem('mode') === 'dark') {
+  document.body.classList.add('dark-mode');
+  document.body.classList.remove('light-mode');
+} else {
+  document.body.classList.add('light-mode');
+  document.body.classList.remove('dark-mode');
+}

@@ -49,3 +49,15 @@
     100% { color: red; }
   }
   
+  #easter-egg {
+    display: inline-block;      /* shrink hitbox to text width */
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 2px 4px;           /* optional: give a tiny clickable padding */
+    color: var(--text-light);   /* will be updated by JS to blend */
+  }
+
+  /* Optional subtle hover hint */
+  #easter-egg:hover {
+    color: var(--text-light-hover, #5a5a5a); 
+  }
