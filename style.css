@@ -6,7 +6,7 @@
   --bg-gradient-dark: linear-gradient(135deg, #3a3a3a, #4a4a4a, #5a5a5a);
 
   /* Text colors */
-  --text-light: #3a3a3a;  /* dark gray for readability on light background */
+  --text-light: #505050;  /* dark gray for readability on light background */
   --text-dark: #d0d0d0;   /* light gray for readability on dark background */
   }
   
@@ -40,7 +40,7 @@
     font-family: Arial, sans-serif;
     transition: background 0.5s ease, color 0.5s ease;
     text-align: center;
-}
+  }
 
 /* Base Styles */
 body, ul, li {
@@ -238,30 +238,30 @@ h1 {
 }
 
 p2 {
-    border-radius: 5%;
+    border-radius: 5px;
     background-color: rgba(0, 64, 0, 0.25);
     color:green;
 }
 
 p3 {
-    border-radius: 5%;
+    border-radius: 5px;
     background-color: rgba(0, 0, 128, 0.25);
     color:blue;
 }
 
 p4 {
-    border-radius: 5%;
+    border-radius: 5px;
     background-color: rgba(128, 128, 0, 0.25);
     color:yellow;
 }
 
 p5 {
-    border-radius: 5%;
+    border-radius: 5px;
     background-color: rgba(128, 0, 0, 0.25);
     color:red;
 }
 p6 {
-    border-radius: 5%;
+    border-radius: 5px;
     background-color: rgba(106, 106, 106, 0.25);
     color:lightgray
 }

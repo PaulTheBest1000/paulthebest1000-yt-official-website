@@ -76,22 +76,49 @@ function showMessage() {
     alert('This website is made by PaulTheBest1000™');
 }
 
-const toggle = document.getElementById('mode-toggle');
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('mode-toggle');
+  const easterEgg = document.getElementById('easter-egg');
 
-// Toggle light/dark mode
-toggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  document.body.classList.toggle('light-mode');
+  // Load saved preference
+  if(localStorage.getItem('mode') === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.body.classList.remove('light-mode');
+  } else {
+    document.body.classList.add('light-mode');
+    document.body.classList.remove('dark-mode');
+  }
 
-  // Save user preference
-  localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+  // Update easter egg color
+  function updateEasterEggColor() {
+    if (!easterEgg) return;
+
+    if (document.body.classList.contains('dark-mode')) {
+        easterEgg.style.color = getComputedStyle(document.documentElement)
+                                .getPropertyValue('--text-light').trim();
+    } else {
+        easterEgg.style.color = getComputedStyle(document.documentElement)
+                                .getPropertyValue('--text-dark').trim();
+    }
+  }
+
+  // Run on load
+  updateEasterEggColor();
+
+  // Toggle light/dark mode
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+
+      // update easter egg color on toggle
+      updateEasterEggColor();
+    });
+  }
+
+  // Secret function
+  window.showSecret = function() {
+      alert('You found the secret! Now DM PaulTheBest1000 YT for your surprise!');
+  };
 });
-
-// Load saved preference
-if(localStorage.getItem('mode') === 'dark') {
-  document.body.classList.add('dark-mode');
-  document.body.classList.remove('light-mode');
-} else {
-  document.body.classList.add('light-mode');
-  document.body.classList.remove('dark-mode');
-}

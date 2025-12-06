@@ -105,32 +105,3 @@ musicFiles.forEach((song, index) => {
 window.addEventListener('DOMContentLoaded', () => {
     loadMusic(currentIndex);
 });
-
-function showSecret() {
-    alert('You found the secret! Now DM PaulTheBest1000 YT for your surprise!');
-}
-
-// Make it blend perfectly with current background
-const easterEgg = document.getElementById('easter-egg');
-
-function updateEasterEggColor() {
-    if (!easterEgg) return;
-
-    // Check the current body class
-    if (document.body.classList.contains('dark-mode')) {
-        easterEgg.style.color = getComputedStyle(document.documentElement)
-                                .getPropertyValue('--bg-gradient-dark'); // blends in
-    } else {
-        easterEgg.style.color = getComputedStyle(document.documentElement)
-                                .getPropertyValue('--bg-gradient-light'); // blends in
-    }
-}
-
-// Run on page load
-updateEasterEggColor();
-
-// Update whenever mode toggles
-const toggle = document.getElementById('mode-toggle');
-if (toggle) {
-    toggle.addEventListener('click', updateEasterEggColor);
-}
