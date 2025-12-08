@@ -119,50 +119,52 @@ header {
     width: 100%;
 }
 
-/* Dropdown Styling */
+/* Desktop dropdown */
 .dropdown {
     position: absolute;
     top: 100%;
-    left: 50%;                 /* move to center */
-    transform: translateX(-50%) translateY(-10px); /* pull back by half */
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
     background-color: #444;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 10px 0;
-    min-width: max-content; /* auto-size to the largest item */
+    min-width: max-content;
     overflow: hidden;
     box-sizing: border-box;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
 }
 
-.menu li:hover .dropdown {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0); /* animate dropdown */
-}
-
+/* Dropdown items */
 .dropdown a {
     color: lightgray;
     padding: 10px 20px;
     font-size: 14px;
     display: block;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.25s ease;
 }
 
 .dropdown a:hover {
     background-color: #575757;
 }
 
+/* Show on hover (desktop) */
+.menu li:hover .dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
 /* Hamburger Button */
 .menu-toggle {
     display: none;
     font-size: 24px;
-    color: yellowgreen;
+    color: red;
     background: none;
-    border: none;
+    border-radius: 10px;
     cursor: pointer;
     padding: 10px;
     position: absolute;
@@ -171,13 +173,14 @@ header {
     z-index: 1001;
 }
 
-/* Responsive Styles */
+/* Mobile adjustments */
 @media (max-width: 768px) {
+
     .menu {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
+        align-items: center;
         display: none;
+        gap: 0;
         width: 100%;
     }
 
@@ -187,21 +190,28 @@ header {
 
     .menu li {
         width: 100%;
+        text-align: center;
+        position: relative;
     }
 
     .menu a {
-        display: block;
-        width: 100%;
-        padding: 10px;
+        width: 95%;
+        padding: 10px 0;
+        display: flex;
+        justify-content: center; /* centers text + icon */
+        align-items: center;
+        gap: 6px; /* little space between text & icon */
+        white-space: nowrap; /* prevents wrapping under icon */
+        margin: 0 auto; /* ensures perfect horizontal centering */
     }
 
     .dropdown {
-        position: static;
+        width: 100%;      /* similar as the menu link */
+        max-width: 100%;  /* prevent overflow */
+        margin: 5px auto 0 auto;
+        text-align: center;
         display: none;
-    }
-
-    .menu-item.active .dropdown {
-        display: block;
+        z-index: 1000;
     }
 
     .menu-toggle {
