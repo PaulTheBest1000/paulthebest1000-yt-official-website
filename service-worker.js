@@ -1,8 +1,8 @@
 // service-worker.js
 
-const CACHE_NAME = 'offline-cache';
+const CACHE_NAME = 'offline-cache-v2'; // increment version for new SW
 const urlsToCache = [
-    '/bored.html', // Adjust to your homepage and other files
+    '/bored.html',
     '/discord.html',
     '/extra.css',
     '/extra.js',
@@ -14,54 +14,52 @@ const urlsToCache = [
     '/videos.html',
     '/war-thunder.html',
     '/youtube.html',
-    // Add other static resources you want to cache
+    // add other static resources
 ];
 
-// Install event to cache resources
+// Install: cache resources
 self.addEventListener('install', (event) => {
+    console.log('📦 Installing new Service Worker...');
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
-                console.log('Caching resources');
+                console.log('Caching resources for offline use');
                 return cache.addAll(urlsToCache);
             })
+            .then(() => self.skipWaiting()) // force SW to activate immediately
     );
 });
 
-// Fetch event to serve cached resources when offline
-self.addEventListener("fetch", (event) => {
+// Fetch: serve from cache, fallback to network
+self.addEventListener('fetch', (event) => {
     const url = new URL(event.request.url);
 
-    // 🚫 Skip YouTube embed & image/video requests
-    if (
-        url.hostname === "www.youtube.com" ||
-        url.hostname === "youtube.com" ||
-        url.hostname === "i.ytimg.com" ||
-        url.hostname === "s.ytimg.com"
-    ) {
-        return; // Let browser handle it normally — no caching
+    // Skip YouTube embeds/images/videos
+    if (['www.youtube.com','youtube.com','i.ytimg.com','s.ytimg.com'].includes(url.hostname)) {
+        return;
     }
 
-    // ✅ Normal caching behavior for the rest of the site
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             return cachedResponse || fetch(event.request);
         })
     );
 });
- 
-// Activate event to clear old caches if needed
+
+// Activate: clear old caches
 self.addEventListener('activate', (event) => {
+    console.log('🗑️ Activating new Service Worker, clearing old caches...');
     const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
                     if (!cacheWhitelist.includes(cacheName)) {
+                        console.log(`Deleting old cache: ${cacheName}`);
                         return caches.delete(cacheName);
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim()) // take control of all pages
     );
 });
