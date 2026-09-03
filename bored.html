@@ -47,8 +47,9 @@
             <li>
               <a href="videos.html"><i class="fa fa-desktop" style="color: #00FF00;"></i> Videos</a>
               <ul class="dropdown">
-                <li><a href="super-mechs.html"><i class="fa fa-robot" style="color: #a7a745;"></i> Super Mechs</a></li>
+                <li><a href="rusted-warfare.html"><i class="fa fa-gun" style="color: #00768e;"></i> Rusted Warfare</a></li>
                 <li><a href="spaceflight-simulator.html"><i class="fa fa-rocket" style="color: #1c1c1e;"></i> Spaceflight Simulator</a></li>
+                <li><a href="super-mechs.html"><i class="fa fa-robot" style="color: #a7a745;"></i> Super Mechs</a></li>
                 <li><a href="war-thunder.html"><i class="fa fa-gun" style="color: #a72845;"></i> War Thunder</a></li>
               </ul>
             </li>
@@ -79,10 +80,10 @@
     <img id="channel-image"
          src="IMG_2601.JPG"
          alt="Channel Profile"
-         title="My current mech"
+         title="My current profile"
          loading="lazy">
     <figcaption id="channel-caption">
-      Fetching your mech's latest look...
+      Fetching your account's latest look...
     </figcaption>
   </figure>
 
@@ -99,19 +100,25 @@
 
       <div id="music-player">
         <p id="now-playing">Now Playing: </p>
+        <p id="file-size">File Size: </p>
+
         <audio id="background-music" controls>
             <source id="audio-source" src="" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
+
+        <select id="music-category">
+            <option value="production">Production Soundtracks</option>
+            <option value="prototype">Prototype Soundtracks</option>
+        </select>
+
         <div>
             <button id="prev-btn">⏮ Previous</button>
             <button id="play-btn">▶ Play</button>
             <button id="pause-btn">⏸ Pause</button>
             <button id="next-btn">⏭ Next</button>
         </div>
-        <h3>Current Playlist</h3>
-        <ul id="playlist"></ul>
-      </div>
+    </div>
 
     <script src="script.js"></script>
   <script src="extra.js"></script>

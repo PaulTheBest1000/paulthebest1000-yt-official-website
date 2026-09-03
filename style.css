@@ -360,60 +360,6 @@ p6 {
     color: white;
 }
 
-/* War Thunder Button */
-.war-thunder {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 18px;
-    color: #a72845; /* Red */
-    font-weight: bold;
-    padding: 8px 12px;
-    border: 2px solid #a72845;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.war-thunder:hover {
-    background-color: #a72845;
-    color: white;
-}
-
-/* Super Mechs Button */
-.super-mechs {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 18px;
-    color: #a7a745; /* Yellow */
-    font-weight: bold;
-    padding: 8px 12px;
-    border: 2px solid #a7a745;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.super-mechs:hover {
-    background-color: #a7a745;
-    color: white;
-}
-
-/* Spaceflight Simulator Button */
-.spaceflight-simulator {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 18px;
-    color: #1c1c1e;
-    font-weight: bold;
-    padding: 8px 12px;
-    border: 2px solid #1c1c1e;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.spaceflight-simulator:hover {
-    background-color: #2e2e2e; /* Lighter Space Gray */
-    color: white;
-}
-
 /* Video gallery styling */
 #video-gallery {
     display: grid;

@@ -30,34 +30,106 @@ fetch(workerURL)
     }
   })
 
-  const musicFiles = [ 
-    { title: 'Panzerlied - German Military March [Music Box]', file: 'PanzerliedGerman Military March [Music Box].mp3' },
-    { title: 'Erika - German Military March Music Box', file: 'yt1s.com - ErikaGerman Military March Music Box.mp3' },
-    { title: 'Westerwaldlied - German Military Song Music Box', file: 'yt1s.com - WesterwaldliedGerman Military Song Music Box.mp3' }
-];
-
 const audio = document.getElementById('background-music');
 const audioSource = document.getElementById('audio-source');
 const nowPlaying = document.getElementById('now-playing');
+const fileSize = document.getElementById('file-size');
+
 const playBtn = document.getElementById('play-btn');
 const pauseBtn = document.getElementById('pause-btn');
 const nextBtn = document.getElementById('next-btn');
 const prevBtn = document.getElementById('prev-btn');
-const playlist = document.getElementById('playlist');
 
+const categorySelect = document.getElementById('music-category');
+
+// Update Play/Pause button states
+function updateButtonStates() {
+    playBtn.disabled = !audio.paused;
+    pauseBtn.disabled = audio.paused;
+}
+
+let musicFiles = [];
 let currentIndex = 0;
+
+async function loadMusicFiles(category = 'production') {
+    if (typeof category !== 'string') {
+        category = 'production';
+    }
+
+    try {
+        const response = await fetch('music.json');
+        const data = await response.json();
+
+        if (!Array.isArray(data[category])) {
+            console.error(`Music category "${category}" was not found in music.json.`);
+            return;
+        }
+
+        musicFiles = data[category].map(file => ({
+            title: file.split('/').pop().replace(/\.mp3$/i, ''),
+            file: file
+        }));
+
+        currentIndex = 0;
+
+        if (musicFiles.length > 0) {
+            loadMusic(currentIndex);
+        }
+
+        updateButtonStates();
+    } catch (error) {
+        console.error('Could not load music:', error);
+    }
+}
+
+categorySelect.addEventListener('change', () => {
+    audio.pause();
+    loadMusicFiles(categorySelect.value);
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    loadMusicFiles('production');
+});
+
+// Get and display the file size
+async function updateFileSize(file) {
+    try {
+        const response = await fetch(file, { method: 'HEAD' });
+        const size = response.headers.get('Content-Length');
+
+        if (size) {
+            const bytes = Number(size);
+            const mb = (bytes / (1024 * 1024)).toFixed(2);
+
+            fileSize.textContent = `File Size: ${mb} MB`;
+        } else {
+            fileSize.textContent = 'File Size: Unknown';
+        }
+    } catch (error) {
+        console.error('Could not get file size:', error);
+        fileSize.textContent = 'File Size: Unknown';
+    }
+}
 
 // Load a song by index
 function loadMusic(index) {
     const song = musicFiles[index];
+
     audioSource.src = song.file;
     audio.load();
+
     nowPlaying.textContent = `Now Playing: ${song.title}`;
+
+    updateFileSize(song.file);
+
+    updateButtonStates();
 }
 
 // Play music
 function playMusic() {
-    audio.play().catch(err => console.log("Autoplay blocked:", err));
+    audio.play().catch(err => {
+        console.log("Autoplay blocked:", err);
+    });
 }
 
 // Pause music
@@ -67,6 +139,8 @@ function pauseMusic() {
 
 // Next track
 function nextMusic() {
+    if (musicFiles.length === 0) return;
+
     currentIndex = (currentIndex + 1) % musicFiles.length;
     loadMusic(currentIndex);
     playMusic();
@@ -74,34 +148,27 @@ function nextMusic() {
 
 // Previous track
 function prevMusic() {
-    currentIndex = (currentIndex - 1 + musicFiles.length) % musicFiles.length;
+    if (musicFiles.length === 0) return;
+
+    currentIndex =
+        (currentIndex - 1 + musicFiles.length) % musicFiles.length;
+
     loadMusic(currentIndex);
     playMusic();
 }
 
-// Auto-play next when current ends
-audio.addEventListener('ended', nextMusic);
+// Update buttons when audio starts/stops
+audio.addEventListener('play', updateButtonStates);
+audio.addEventListener('pause', updateButtonStates);
+
+// Auto play next when current ends
+audio.addEventListener('ended', () => {
+    updateButtonStates();
+    nextMusic();
+});
 
 // Attach button events
 playBtn.addEventListener('click', playMusic);
 pauseBtn.addEventListener('click', pauseMusic);
 nextBtn.addEventListener('click', nextMusic);
 prevBtn.addEventListener('click', prevMusic);
-
-// Build playlist UI
-musicFiles.forEach((song, index) => {
-    const li = document.createElement('li');
-    li.textContent = song.title;
-    li.style.cursor = 'pointer';
-    li.addEventListener('click', () => {
-        currentIndex = index;
-        loadMusic(currentIndex);
-        playMusic();
-    });
-    playlist.appendChild(li);
-});
-
-// Load first track on startup
-window.addEventListener('DOMContentLoaded', () => {
-    loadMusic(currentIndex);
-});
