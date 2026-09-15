@@ -7,6 +7,7 @@ const urlsToCache = [
     '/extra.css',
     '/extra.js',
     '/index.html',
+    '/rusted-warfare.html',
     '/script.js',
     '/spaceflight-simulator.html',
     '/style.css',
