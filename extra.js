@@ -41,6 +41,20 @@ const nextBtn = document.getElementById('next-btn');
 const prevBtn = document.getElementById('prev-btn');
 
 const categorySelect = document.getElementById('music-category');
+const musicArtwork = document.getElementById('music-artwork');
+
+console.log({
+    audio: document.getElementById('background-music'),
+    audioSource: document.getElementById('audio-source'),
+    nowPlaying: document.getElementById('now-playing'),
+    fileSize: document.getElementById('file-size'),
+    playBtn: document.getElementById('play-btn'),
+    pauseBtn: document.getElementById('pause-btn'),
+    nextBtn: document.getElementById('next-btn'),
+    prevBtn: document.getElementById('prev-btn'),
+    categorySelect: document.getElementById('music-category'),
+    musicArtwork: document.getElementById('music-artwork')
+});
 
 // Update Play/Pause button states
 function updateButtonStates() {
@@ -111,11 +125,75 @@ async function updateFileSize(file) {
     }
 }
 
+let artworkUrl = null;
+let artworkRequestId = 0;
+
+async function updateMusicArtwork(file) {
+    const requestId = ++artworkRequestId;
+
+    // Show the fallback while loading.
+    musicArtwork.src = 'default-cover.png';
+    musicArtwork.alt = 'Album artwork unavailable';
+
+    if (!window.jsmediatags || !file) return;
+
+    try {
+        const response = await fetch(file);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${file}`);
+        }
+
+        const blob = await response.blob();
+
+        // Ignore this result if another track was selected.
+        if (requestId !== artworkRequestId) return;
+
+        window.jsmediatags.read(blob, {
+            onSuccess: (result) => {
+                if (requestId !== artworkRequestId) return;
+
+                const picture = result.tags.picture;
+
+                if (!picture?.data?.length || !picture.format) {
+                    return; // No embedded artwork; keep the fallback.
+                }
+
+                // Release the previous artwork URL.
+                if (artworkUrl) {
+                    URL.revokeObjectURL(artworkUrl);
+                }
+
+                const imageBlob = new Blob(
+                    [new Uint8Array(picture.data)],
+                    { type: picture.format }
+                );
+
+                artworkUrl = URL.createObjectURL(imageBlob);
+                musicArtwork.src = artworkUrl;
+                musicArtwork.alt =
+                    `Album artwork for ${musicFiles[currentIndex]?.title || 'current track'}`;
+            },
+
+            onError: (error) => {
+                if (requestId === artworkRequestId) {
+                    console.warn('Could not read embedded artwork:', error);
+                }
+            }
+        });
+    } catch (error) {
+        if (requestId === artworkRequestId) {
+            console.warn('Could not load artwork:', error);
+        }
+    }
+}
+
 // Load a song by index
 function loadMusic(index) {
     const song = musicFiles[index];
 
     audioSource.src = song.file;
+    updateMusicArtwork(song.file);
     audio.load();
 
     nowPlaying.textContent = `Now Playing: ${song.title}`;

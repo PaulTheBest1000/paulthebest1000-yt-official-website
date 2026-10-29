@@ -84,3 +84,11 @@
     border-color: #555;
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
+
+#music-artwork {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #222;
+}

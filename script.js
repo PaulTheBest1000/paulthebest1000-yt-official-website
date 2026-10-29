@@ -80,13 +80,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('mode-toggle');
   const easterEgg = document.getElementById('easter-egg');
 
-  // Load saved preference
-  if(localStorage.getItem('mode') === 'dark') {
-    document.body.classList.add('dark-mode');
-    document.body.classList.remove('light-mode');
-  } else {
-    document.body.classList.add('light-mode');
-    document.body.classList.remove('dark-mode');
+  // Load the saved preference; default to light mode.
+  const savedMode = localStorage.getItem('mode') || 'light';
+
+  document.body.classList.toggle('dark-mode', savedMode === 'dark');
+  document.body.classList.toggle('light-mode', savedMode !== 'dark');
+
+  // Toggle between dark and light mode.
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      const newMode = isDarkMode ? 'light' : 'dark';
+
+      document.body.classList.toggle('dark-mode', newMode === 'dark');
+      document.body.classList.toggle('light-mode', newMode === 'light');
+
+      // Remember the user's preference for their next visit.
+      localStorage.setItem('mode', newMode);
+    });
   }
 
   // Update easter egg color
