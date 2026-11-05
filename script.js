@@ -76,57 +76,49 @@ function showMessage() {
     alert('This website is made by PaulTheBest1000™');
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('mode-toggle');
-  const easterEgg = document.getElementById('easter-egg');
+    const toggle = document.getElementById('mode-toggle');
+    const easterEgg = document.getElementById('easter-egg');
 
-  // Load the saved preference; default to light mode.
-  const savedMode = localStorage.getItem('mode') || 'light';
+    // Load saved preference; default to light mode.
+    const savedMode = localStorage.getItem('mode') || 'light';
 
-  document.body.classList.toggle('dark-mode', savedMode === 'dark');
-  document.body.classList.toggle('light-mode', savedMode !== 'dark');
+    function applyMode(mode) {
+        const isDarkMode = mode === 'dark';
 
-  // Toggle between dark and light mode.
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      const isDarkMode = document.body.classList.contains('dark-mode');
-      const newMode = isDarkMode ? 'light' : 'dark';
+        document.body.classList.toggle('dark-mode', isDarkMode);
+        document.body.classList.toggle('light-mode', !isDarkMode);
 
-      document.body.classList.toggle('dark-mode', newMode === 'dark');
-      document.body.classList.toggle('light-mode', newMode === 'light');
+        localStorage.setItem('mode', mode);
 
-      // Remember the user's preference for their next visit.
-      localStorage.setItem('mode', newMode);
-    });
-  }
-
-  // Update easter egg color
-  function updateEasterEggColor() {
-    if (!easterEgg) return;
-
-    if (document.body.classList.contains('dark-mode')) {
-        easterEgg.style.color = getComputedStyle(document.documentElement)
-                                .getPropertyValue('--text-light').trim();
-    } else {
-        easterEgg.style.color = getComputedStyle(document.documentElement)
-                                .getPropertyValue('--text-dark').trim();
+        updateEasterEggColor();
     }
-  }
 
-  // Run on load
-  updateEasterEggColor();
+    // Update Easter egg color.
+    function updateEasterEggColor() {
+        if (!easterEgg) return;
 
-  // Toggle light/dark mode
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      document.body.classList.toggle('light-mode');
-      localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        const isDarkMode = document.body.classList.contains('dark-mode');
 
-      // update easter egg color on toggle
-      updateEasterEggColor();
-    });
-  }
+        const variable = isDarkMode ? '--text-light' : '--text-dark';
+
+        easterEgg.style.color = getComputedStyle(document.documentElement)
+            .getPropertyValue(variable)
+            .trim();
+    }
+
+    // Apply saved mode.
+    applyMode(savedMode);
+
+    // Toggle between light and dark mode.
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+
+            applyMode(isDarkMode ? 'light' : 'dark');
+        });
+    }
 
   // Secret function
   window.showSecret = function() {

@@ -108,20 +108,29 @@ window.addEventListener('DOMContentLoaded', () => {
 // Get and display the file size
 async function updateFileSize(file) {
     try {
-        const response = await fetch(file, { method: 'HEAD' });
-        const size = response.headers.get('Content-Length');
+        const response = await fetch(file, {
+            method: 'GET',
+            headers: {
+                Range: 'bytes=0-0'
+            }
+        });
+
+        if (!response.ok && response.status !== 206) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const size = response.headers.get('Content-Range')
+            ?.split('/')[1];
 
         if (size) {
-            const bytes = Number(size);
-            const mb = (bytes / (1024 * 1024)).toFixed(2);
-
-            fileSize.textContent = `File Size: ${mb} MB`;
+            fileSize.textContent =
+                `File Size: ${(Number(size) / 1024 / 1024).toFixed(2)} MB`;
         } else {
-            fileSize.textContent = 'File Size: Unknown';
+            fileSize.textContent = 'File size unavailable';
         }
     } catch (error) {
-        console.error('Could not get file size:', error);
-        fileSize.textContent = 'File Size: Unknown';
+        console.warn('Could not retrieve file size:', error);
+        fileSize.textContent = 'File size unavailable';
     }
 }
 

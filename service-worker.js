@@ -1,66 +1,113 @@
 // service-worker.js
 
-const CACHE_NAME = 'offline-cache-v2'; // increment version for new SW
+
+const CACHE_NAME = 'offline-cache-v3';
+
+const BASE_PATH = self.registration.scope;
+
 const urlsToCache = [
-    '/bored.html',
-    '/discord.html',
-    '/extra.css',
-    '/extra.js',
-    '/index.html',
-    '/rusted-warfare.html',
-    '/script.js',
-    '/spaceflight-simulator.html',
-    '/style.css',
-    '/super-mechs.html',
-    '/videos.html',
-    '/war-thunder.html',
-    '/youtube.html',
-    // add other static resources
+    'bored.html',
+    'discord.html',
+    'extra.css',
+    'extra.js',
+    'index.html',
+    'music.json',
+    'rusted-warfare.html',
+    'script.js',
+    'spaceflight-simulator.html',
+    'style.css',
+    'super-mechs.html',
+    'videos.html',
+    'war-thunder.html',
+    'youtube.html'
 ];
 
-// Install: cache resources
-self.addEventListener('install', (event) => {
-    console.log('📦 Installing new Service Worker...');
+const CACHE_URLS = urlsToCache.map(
+    file => new URL(file, BASE_PATH).href
+);
+
+// INSTALL
+self.addEventListener('install', event => {
+    console.log('📦 Installing Service Worker...');
+
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => {
-                console.log('Caching resources for offline use');
-                return cache.addAll(urlsToCache);
-            })
-            .then(() => self.skipWaiting()) // force SW to activate immediately
+        (async () => {
+            const cache = await caches.open(CACHE_NAME);
+
+            const results = await Promise.allSettled(
+                CACHE_URLS.map(async url => {
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+
+                    await cache.put(url, response);
+                    console.log('✅ Cached:', url);
+                })
+            );
+
+            results.forEach((result, index) => {
+                if (result.status === 'rejected') {
+                    console.warn(
+                        '❌ Failed to cache:',
+                        CACHE_URLS[index],
+                        result.reason
+                    );
+                }
+            });
+
+            await self.skipWaiting();
+        })()
     );
 });
 
-// Fetch: serve from cache, fallback to network
-self.addEventListener('fetch', (event) => {
-    const url = new URL(event.request.url);
+// FETCH
+self.addEventListener('fetch', event => {
+    const request = event.request;
+    const url = new URL(request.url);
 
-    // Skip YouTube embeds/images/videos
-    if (['www.youtube.com','youtube.com','i.ytimg.com','s.ytimg.com'].includes(url.hostname)) {
+    // Only handle GET requests from this website.
+    if (
+        request.method !== 'GET' ||
+        url.origin !== self.location.origin
+    ) {
         return;
     }
 
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            return cachedResponse || fetch(event.request);
-        })
+        (async () => {
+            const cached = await caches.match(request);
+
+            if (cached) {
+                return cached;
+            }
+
+            return fetch(request);
+        })()
     );
 });
 
-// Activate: clear old caches
-self.addEventListener('activate', (event) => {
-    console.log('🗑️ Activating new Service Worker, clearing old caches...');
-    const cacheWhitelist = [CACHE_NAME];
+// ACTIVATE
+self.addEventListener('activate', event => {
+    console.log('🗑️ Activating Service Worker...');
+
     event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (!cacheWhitelist.includes(cacheName)) {
-                        console.log(`Deleting old cache: ${cacheName}`);
+        (async () => {
+            const cacheNames = await caches.keys();
+
+            await Promise.all(
+                cacheNames.map(cacheName => {
+                    if (cacheName !== CACHE_NAME) {
+                        console.log('Deleting old cache:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
             );
-        }).then(() => self.clients.claim()) // take control of all pages
+
+            await self.clients.claim();
+
+            console.log('✅ Service Worker activated!');
+        })()
     );
 });
