@@ -10,7 +10,7 @@ const urlsToCache = [
     'discord.html',
     'extra.css',
     'extra.js',
-    'index.html',
+    'IMG_2379.ico',
     'music.json',
     'rusted-warfare.html',
     'script.js',
@@ -67,23 +67,50 @@ self.addEventListener('fetch', event => {
     const request = event.request;
     const url = new URL(request.url);
 
-    // Only handle GET requests from this website.
+    // Only handle GET requests.
+    if (request.method !== 'GET') return;
+
+    // Ignore external services, including YouTube.
+    if (url.origin !== self.location.origin) return;
+
+    // Ignore online service endpoints.
     if (
-        request.method !== 'GET' ||
-        url.origin !== self.location.origin
+        url.pathname.startsWith('/api/') ||
+        url.pathname.startsWith('/notification-reply')
     ) {
         return;
     }
 
     event.respondWith(
         (async () => {
-            const cached = await caches.match(request);
+            try {
+                // Try getting the latest version from the network.
+                const response = await fetch(request);
 
-            if (cached) {
-                return cached;
+                // Cache successful responses.
+                if (response.ok && response.type === 'basic') {
+                    const cache = await caches.open(CACHE_NAME);
+                    await cache.put(request, response.clone());
+                }
+
+                return response;
+
+            } catch (error) {
+                // Network unavailable: use cached version.
+                const cached = await caches.match(request);
+
+                if (cached) {
+                    return cached;
+                }
+
+                // No cached version available.
+                return new Response('You are offline and this page is not cached.', {
+                    status: 503,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                });
             }
-
-            return fetch(request);
         })()
     );
 });

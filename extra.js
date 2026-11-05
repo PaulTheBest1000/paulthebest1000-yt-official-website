@@ -141,7 +141,7 @@ async function updateMusicArtwork(file) {
     const requestId = ++artworkRequestId;
 
     // Show the fallback while loading.
-    musicArtwork.src = 'default-cover.png';
+    musicArtwork.src = 'IMG_2601.JPG';
     musicArtwork.alt = 'Album artwork unavailable';
 
     if (!window.jsmediatags || !file) return;
